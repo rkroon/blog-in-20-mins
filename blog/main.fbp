@@ -1,0 +1,404 @@
+'Blog': {
+  'type': 'WebServer',
+  'properties': {
+    'title': 'notitle',
+    'name': 'notitle',
+    'email' : 'no@mail.com',
+    'date': new Date(),
+    'body': 'nobody',
+  },
+  'inPorts': {
+    'start': {
+        'datatype' : 'all',
+    },
+    'stop': {
+      'datatype': 'all',
+    },
+    'add': {
+      'datatype': 'string',
+    },
+    'remove': {
+      'datatype': 'string',
+    },
+    'list': {
+      'datatype': 'object',
+    },
+    'view': {
+      'datatype': 'string',
+    },
+  },
+  'outPorts': {
+    'started': {
+      'datatype': 'object',
+    },
+    'stopped': {
+      'datatype': 'object',
+    },
+    'added': {
+      'datatype': 'object',
+    },
+    'removed': {
+      'datatype': 'object',
+    },
+    'listed': {
+      'datatype': 'array',
+    },
+    'viewed': {
+      'datatype': 'object',
+    },
+    'error': {
+      'datatype': 'object',
+      'scope': [ 'scope' ],
+    },
+
+  },
+
+},
+'Value': {
+  'type': 'Component',
+  'inPorts': {
+    'in': {
+      'datatype': 'all',
+      'control': true,
+    },
+  },
+  'outPorts': {
+    'out': {
+      'datatype': 'all',
+      'control': true,
+    },
+  },
+},
+'Split': {
+  'type': 'Component',
+  'inPorts': {
+    'in': {
+      'datatype': 'string',
+    },
+  },
+  'outPorts': {
+    'out1': {
+      'datatype': 'string',
+    },
+    'out2': {
+      'datatype': 'string',
+    },
+  },
+},
+
+
+'Start': {
+  'type': 'Component',
+  'inPorts': {
+    'in': {
+      'datatype': 'all',
+    },
+  },
+  'outPorts': {
+    'out': {
+      'datatype': 'all',
+      'control': true,
+    },
+  },
+},
+'Stop': {
+  'type': 'Component',
+  'inPorts': {
+    'in': {
+      'datatype': 'all',
+    },
+  },
+  'outPorts': {
+    'out': {
+      'datatype': 'all',
+      'control': true,
+    },
+  },
+},
+
+'Split1': {
+  'type': 'Component',
+  'inPorts': {
+    'name': {
+      'datatype': 'string',
+    },
+    'email': {
+      'datatype': 'string',
+    },
+    'title': {
+      'datatype': 'string',
+    },
+    'body': {
+      'datatype': 'string',
+    },
+    'date': {
+      'datatype': 'object',
+    },
+    'add': {
+      'datatype': 'string',
+    },
+    'view': {
+      'datatype': 'string',
+    },
+    'remove': {
+      'datatype': 'string',
+    },
+    'start': {
+      'datatype': 'all',
+    },
+    'stop': {
+      'datatype': 'all',
+    },
+    'list': {
+      'datatype': 'object'
+    },
+  },
+  'outPorts': {
+    'properties': {
+      'datatype': 'object',
+    },
+    'postid': {
+      'datatype': 'string',
+    },
+    'viewid': {
+      'datatype': 'string',
+    },
+    'error': {
+      'datatype': 'object',
+    },
+    'copyStart': {
+      'datatype': 'all',
+      'control': true,
+    },
+    'copyStop': {
+      'datatype': 'all',
+      'control': true,
+    },
+    'ready': {
+      'datatype': 'all',
+      'control': true,
+    },
+    'dbReady': {
+      'datatype': 'all',
+      'control': true,
+    },
+    'WebReady': {
+      'datatype': 'all',
+      'control': true,
+    },
+  },
+},
+'CopyStart': {
+  'type': 'Component',
+  'label': 'WebServer',
+
+  'inPorts': {
+    'start': {
+      'datatype': 'all',
+    },
+  },
+  'outPorts': {
+    'out := /completed': {
+      'datatype': 'all',
+      'scope': [ 'scope' ],
+    },
+  },
+},
+'CopyStop': {
+  'type': 'Component',
+  'label': 'Stop',
+
+  'inPorts': {
+    'stop': {
+      'datatype': 'all',
+    },
+  },
+  'outPorts': {
+    'out := /completed': {
+      'datatype': 'all',
+      'scope': [ 'scope' ],
+    },
+  },
+  'scope': [ 'scope' ],
+},
+
+
+'Networks.Split1': {
+  'name': 'Split1',
+  'group': 'WebServer',
+  'description': 'Splits a url into a path and parameters',
+  'color': '#02B213',
+  'processes': {
+    'Split1': {
+      'readOnly': true,
+      'position': {
+        'x': -243,
+        'y': -41,
+      },
+    },
+  },
+  'connections': {
+    'Split1/Error': {
+      'process': 'Split1',
+      'port': 'error',
+      'x': -146.5,
+      'y': -23,
+      'labels': [
+        {
+          'type': 'err',
+          'pos': 30,
+          'label': 'Error',
+          'io': 'out',
+          'state': 'error',
+          'id': '72664e00-945d-4ea8-9020-6251d0af61ff',
+        },
+      ],
+    },
+    'Split1/Name': {
+      'process': 'Split1',
+      'port': 'name',
+      'x': 29.5,
+      'y': -23,
+      'labels': [
+        {
+          'type': 'data',
+          'pos': 30,
+          'label': 'n',
+          'io': 'out',
+          'state': 'data',
+          'id': '7a92e298-9e1f- 4508-ac04-f01d1a916ff7',
+        },
+      ],
+    },
+    'Split1/Email': {
+      'process': 'Split1',
+      'port': 'email',
+      'labels': [
+        {
+          'type': 'data',
+          'pos': 30,
+          'label': 'e',
+          'io': 'out',
+          'state': 'data',
+          'id': 'd44a7ff6-ba54-414d-9d1b-0bb0db23b8f8',
+        },
+      ],
+    },
+    'Split1/Title': {
+      'process': 'Split1',
+      'port': 'title',
+      'x': 314,
+      'y': -23,
+      'labels': [
+        {
+          'type': 't',
+          'pos': 30,
+          'label': 't',
+          'io': 'out',
+          'state': 'data',
+          'id': 'b3ef1617-d217-43cd-9c3a-3c230f817a5e',
+        },
+      ],
+    },
+    'Split1/Post': {
+      'process': 'Split1',
+      'port': 'write',
+      'x': 179.5,
+      'y': 31,
+      'labels': [
+        {
+          'type': 'w',
+          'pos': 30,
+          'label': 'w',
+          'io': 'in',
+          'state': 'data',
+          'id': 'e75d1bfa-c222-40f2-8b0a-a57855f55709',
+        },
+      ],
+    },
+    'Split1/View': {
+      'process': 'Split1',
+      'port': 'read',
+      'x': 612,
+      'y': 31,
+      'labels': [
+        {
+          'type': 'r',
+          'pos': 30,
+          'label': 'r',
+          'io': 'in',
+          'state': 'data',
+          'id': 'e75d1bfa-c222-40f2-8b0a-a57855f55709',
+        },
+      ],
+    },
+    'Split1/Remove': {
+      'process': 'Split1',
+      'port': 'delete',
+      'x': - $(document).width(),
+      'y': - $(document).height(),
+      'labels': [
+        {
+          'type': 'd',
+          'pos': 30,
+          'label': 'd',
+          'io': 'in',
+          'state': 'data',
+          'id': 'e75d1bfa-c222-40f2-8b0a-a57855f55709',
+        },
+      ],
+    },
+    'Split1/Start': {
+      'process': 'Split1',
+      'port': 'start',
+      'x': - $(document).width(),
+      'y': - $(document).height(),
+      'labels': [
+        {
+          'type': 'd',
+          'pos': 30,
+          'label': 'd',
+          'io': 'in',
+          'state': 'data',
+          'id': 'e75d1bfa-c222-40f2-8b0a-a57855f55709',
+        },
+      ],
+    },
+    'Split1/Stop': {
+      'process': 'Split1',
+      'port': 'stop',
+      'x': - $(document).width(),
+      'y': - $(document).height(),
+      'labels': [
+        {
+          'type': 'd',
+          'pos': 30,
+          'label': 'd',
+          'io': 'in',
+          'state': 'data',
+          'id': 'e75d1bfa-c222-40f2-8b0a-a57855f55709',
+        },
+      ],
+    },
+    'Split1/List': {
+      'process': 'Split1',
+      'port': 'list',
+      'x': - $(document).width(),
+      'y': - $(document).height(),
+      'labels': [
+        {
+          'type': 'd',
+          'pos': 30,
+          'label': 'd',
+          'io': 'in',
+          'state': 'data',
+          'id': 'e75d1bfa-c222-40f2-8b0a-a57855f55709',
+        },
+      ],
+    },
+  },
+  'subflows': {},
+
+    }
+
+};
